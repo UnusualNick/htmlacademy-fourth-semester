@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
-* Студент: [Илья Бобоедов](https://up.htmlacademy.ru/univer-js2/6/user/2626093).
-* Наставник: `Неизвестно`.
+- Студент: [Илья Бобоедов](https://up.htmlacademy.ru/univer-js2/6/user/2626093).
+- Наставник: [Евгений Лепёшкин](https://htmlacademy.ru/profile/id144641).
 
 ---
 
