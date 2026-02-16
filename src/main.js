@@ -4,7 +4,7 @@ import PointsModel from './model/points-model.js';
 import FilterModel from './model/filter-model.js';
 import PointsApiService from './points-api-service.js';
 
-const AUTHORIZATION = 'Basic hS2sd3dfSwcl1sa2j';
+const AUTHORIZATION = `Basic ${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`;
 const END_POINT = 'https://21.objects.pages.academy/big-trip';
 
 const siteMainElement = document.querySelector('.page-main');
