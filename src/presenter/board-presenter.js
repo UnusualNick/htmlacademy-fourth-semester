@@ -1,7 +1,7 @@
-import SortView from '../view/sort.js';
-import EventListView from '../view/event-list.js';
-import PointView from '../view/point.js';
-import EditPointView from '../view/edit-point.js';
+import SortView from '../view/sort-view.js';
+import EventListView from '../view/event-list-view.js';
+import PointView from '../view/point-view.js';
+import EditPointView from '../view/edit-point-view.js';
 import {render, RenderPosition} from '../render.js';
 
 export default class BoardPresenter {

@@ -1,4 +1,4 @@
-import FilterView from './view/filter.js';
+import FilterView from './view/filter-view.js';
 import BoardPresenter from './presenter/board-presenter.js';
 import {render} from './render.js';
 
