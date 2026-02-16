@@ -7,43 +7,22 @@ const Method = {
   DELETE: 'DELETE',
 };
 
-/**
- * Service for interacting with the points API
- * @extends ApiService
- */
 export default class PointsApiService extends ApiService {
-  /**
-   * Get all points from server
-   * @returns {Promise<Array>}
-   */
   get points() {
     return this._load({url: 'points'})
       .then(ApiService.parseResponse);
   }
 
-  /**
-   * Get all destinations from server
-   * @returns {Promise<Array>}
-   */
   get destinations() {
     return this._load({url: 'destinations'})
       .then(ApiService.parseResponse);
   }
 
-  /**
-   * Get all offers from server
-   * @returns {Promise<Array>}
-   */
   get offers() {
     return this._load({url: 'offers'})
       .then(ApiService.parseResponse);
   }
 
-  /**
-   * Update a point on the server
-   * @param {Object} point - Point data
-   * @returns {Promise<Object>}
-   */
   async updatePoint(point) {
     const response = await this._load({
       url: `points/${point.id}`,
@@ -57,11 +36,6 @@ export default class PointsApiService extends ApiService {
     return parsedResponse;
   }
 
-  /**
-   * Add a new point to the server
-   * @param {Object} point - Point data
-   * @returns {Promise<Object>}
-   */
   async addPoint(point) {
     const response = await this._load({
       url: 'points',
@@ -75,11 +49,6 @@ export default class PointsApiService extends ApiService {
     return parsedResponse;
   }
 
-  /**
-   * Delete a point from the server
-   * @param {Object} point - Point data
-   * @returns {Promise<void>}
-   */
   async deletePoint(point) {
     const response = await this._load({
       url: `points/${point.id}`,
@@ -89,11 +58,6 @@ export default class PointsApiService extends ApiService {
     return response;
   }
 
-  /**
-   * Adapt client point structure to server structure
-   * @param {Object} point - Client point object
-   * @returns {Object} Server point object
-   */
   #adaptToServer(point) {
     const adaptedPoint = {...point,
       'base_price': point.basePrice,
