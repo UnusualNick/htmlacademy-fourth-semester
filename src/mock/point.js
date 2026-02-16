@@ -14,10 +14,13 @@ const generatePoint = (id) => {
   // Dedup offerIds
   const uniqueOfferIds = [...new Set(offerIds)];
 
+  const dateFrom = `2019-07-${getRandomInteger(10, 31)}T${String(getRandomInteger(0, 23)).padStart(2, '0')}:${String(getRandomInteger(0, 59)).padStart(2, '0')}:00.000Z`;
+  const dateTo = `2019-07-${getRandomInteger(10, 31)}T${String(getRandomInteger(0, 23)).padStart(2, '0')}:${String(getRandomInteger(0, 59)).padStart(2, '0')}:00.000Z`;
+
   return {
     basePrice: getRandomInteger(100, 1000),
-    dateFrom: `2019-07-${getRandomInteger(10, 31)}T${getRandomInteger(0, 23)}:${getRandomInteger(0, 59)}:00.000Z`,
-    dateTo: `2019-07-${getRandomInteger(10, 31)}T${getRandomInteger(0, 23)}:${getRandomInteger(0, 59)}:00.000Z`,
+    dateFrom,
+    dateTo,
     destination,
     id: String(id),
     isFavorite: Boolean(getRandomInteger(0, 1)),
