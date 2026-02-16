@@ -1,6 +1,8 @@
 import SortView from '../view/sort-view.js';
 import EventListView from '../view/event-list-view.js';
 import ListEmptyView from '../view/list-empty-view.js';
+import LoadingView from '../view/loading-view.js';
+import FailedLoadDataView from '../view/failed-load-data-view.js';
 import PointPresenter from './point-presenter.js';
 import NewPointPresenter from './new-point-presenter.js';
 import {render, remove} from '../framework/render.js';
@@ -16,11 +18,15 @@ export default class BoardPresenter {
   #sortComponent = null;
   #eventListComponent = new EventListView();
   #listEmptyComponent = null;
+  #loadingComponent = new LoadingView();
+  #failedLoadDataComponent = new FailedLoadDataView();
 
   #pointPresenters = new Map();
   #newPointPresenter = null;
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
+  #isLoading = true;
+  #isError = false;
 
   constructor({boardContainer, pointsModel, filterModel}) {
     this.#boardContainer = boardContainer;
@@ -98,6 +104,14 @@ export default class BoardPresenter {
         this.#clearBoard({resetSortType: true});
         this.#renderBoard();
         break;
+      case UpdateType.INIT:
+        this.#isLoading = false;
+        if (data && data.isError) {
+          this.#isError = true;
+        }
+        remove(this.#loadingComponent);
+        this.#renderBoard();
+        break;
     }
   };
 
@@ -126,6 +140,14 @@ export default class BoardPresenter {
     render(this.#listEmptyComponent, this.#boardContainer);
   }
 
+  #renderLoading() {
+    render(this.#loadingComponent, this.#boardContainer);
+  }
+
+  #renderFailedLoadData() {
+    render(this.#failedLoadDataComponent, this.#boardContainer);
+  }
+
   #renderSort() {
     this.#sortComponent = new SortView({
       currentSortType: this.#currentSortType,
@@ -145,6 +167,8 @@ export default class BoardPresenter {
     this.#pointPresenters.clear();
 
     remove(this.#sortComponent);
+    remove(this.#loadingComponent);
+    remove(this.#failedLoadDataComponent);
     if (this.#listEmptyComponent) {
       remove(this.#listEmptyComponent);
     }
@@ -155,6 +179,16 @@ export default class BoardPresenter {
   }
 
   #renderBoard() {
+    if (this.#isLoading) {
+      this.#renderLoading();
+      return;
+    }
+
+    if (this.#isError) {
+      this.#renderFailedLoadData();
+      return;
+    }
+
     const points = this.points;
     const pointCount = points.length;
 
